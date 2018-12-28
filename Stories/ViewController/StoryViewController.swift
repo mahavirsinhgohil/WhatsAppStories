@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class StoryViewController: UIViewController {
 
@@ -16,7 +17,7 @@ class StoryViewController: UIViewController {
     var rowIndex:Int = 0
     var arrUser = [StoryHandler]()
     var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
-    var imageCollection: [[UIImage]]!
+    var storyCollection: [[URL]]!
     
     var tapGest: UITapGestureRecognizer!
     var longPressGest: UILongPressGestureRecognizer!
@@ -33,13 +34,6 @@ class StoryViewController: UIViewController {
         setupModel()
         addGesture()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let storyBar = getCurrentStory() {
-            storyBar.startAnimation()
-        }
-    }
 
     @IBAction func cancelBtnTouched() {
         self.dismiss(animated: true, completion: nil)
@@ -50,13 +44,23 @@ class StoryViewController: UIViewController {
 extension StoryViewController {
     
     func setupModel() {
-        for collection in imageCollection {
-            arrUser.append(StoryHandler(imgs: collection))
+        for collection in storyCollection {
+            preDownloadImages(collection: collection)
+            arrUser.append(StoryHandler(stories: collection))
         }
         StoryHandler.userIndex = rowIndex
         outerCollection.reloadData()
         outerCollection.scrollToItem(at: IndexPath(item: StoryHandler.userIndex, section: 0),
                                      at: .centeredHorizontally, animated: false)
+    }
+    
+    func preDownloadImages(collection: [URL]) {
+        let imageView = UIImageView()
+        for storyURL in collection {
+            imageView.kf.setImage(with: storyURL,
+                                  options: [.memoryCacheExpiration(.days(1))]) { (result) in }
+
+        }
     }
     
     func currentStoryIndexChanged(index: Int) {
@@ -88,12 +92,7 @@ extension StoryViewController {
         let indexPath = IndexPath(item: StoryHandler.userIndex, section: 0)
         outerCollection.reloadItems(at: [indexPath])
         outerCollection.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { 
-            if let storyBar = self.getCurrentStory() {
-                storyBar.animate(animationIndex: self.arrUser[StoryHandler.userIndex].storyIndex)
-                self.addGesture()
-            }
-        }
+        self.addGesture()
     }
     
     func getCurrentStory() -> StoryBar? {

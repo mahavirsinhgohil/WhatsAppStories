@@ -97,10 +97,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
+                                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rhH-IG-sfK">
+                                                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                                                    </activityIndicatorView>
                                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ei-CO-o6g">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Fz-t6-Ezg">
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Fz-t6-Ezg">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                                             </imageView>
                                                                         </subviews>
@@ -119,10 +122,13 @@
                                                                 <constraint firstItem="0ei-CO-o6g" firstAttribute="top" secondItem="is1-tt-ynq" secondAttribute="top" id="5hX-uP-UTR"/>
                                                                 <constraint firstAttribute="bottom" secondItem="0ei-CO-o6g" secondAttribute="bottom" id="62k-73-XNI"/>
                                                                 <constraint firstAttribute="trailing" secondItem="0ei-CO-o6g" secondAttribute="trailing" id="FrL-D4-rn6"/>
+                                                                <constraint firstItem="rhH-IG-sfK" firstAttribute="centerX" secondItem="is1-tt-ynq" secondAttribute="centerX" id="SSh-mt-UpF"/>
+                                                                <constraint firstItem="rhH-IG-sfK" firstAttribute="centerY" secondItem="is1-tt-ynq" secondAttribute="centerY" id="j0b-6R-In1"/>
                                                                 <constraint firstItem="0ei-CO-o6g" firstAttribute="leading" secondItem="is1-tt-ynq" secondAttribute="leading" id="pVR-3s-BqV"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imgStory" destination="1Fz-t6-Ezg" id="77S-0F-oR6"/>
+                                                                <outlet property="indicator" destination="rhH-IG-sfK" id="vdB-DP-WHc"/>
                                                                 <outlet property="scrollV" destination="0ei-CO-o6g" id="mf4-Nl-sHP"/>
                                                             </connections>
                                                         </collectionViewCell>

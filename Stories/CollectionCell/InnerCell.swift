@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import Kingfisher
 
-protocol ImageZoomDelegate: class {
-    func imageZoomStart()
-    func imageZoomEnd()
+protocol StoryHandlerDelegate: class {
+    func startStory()
+    func pauseStory()
+    func resumeStory()
 }
 
 class InnerCell: UICollectionViewCell {
     
-    weak var delegate: ImageZoomDelegate?
+    weak var delegate: StoryHandlerDelegate?
     
     @IBOutlet weak var scrollV: UIScrollView!
     @IBOutlet weak var imgStory: UIImageView!
-    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+
     private var isImageDragged:Bool = false
     
     override func awakeFromNib() {
@@ -36,10 +39,26 @@ class InnerCell: UICollectionViewCell {
 // MARK:- Helper Methods
 extension InnerCell {
     
-    func setImage(_ image: UIImage) {
-        imgStory.image = image
+    func setStory(_ storyURL: URL) {
         isImageDragged = false
-        setContentMode()
+        scrollV.isUserInteractionEnabled = false
+        indicator.startAnimating()
+        indicator.isHidden = false
+        imgStory.kf.setImage(with: storyURL,
+                             options: [.transition(.fade(0.2)),
+                                       .memoryCacheExpiration(.days(1)),
+                                       .downloadPriority(URLSessionTask.highPriority)]) {
+                                        [weak self] (result) in
+            switch result {
+            case .success(_):
+                self?.scrollV.isUserInteractionEnabled = true
+                self?.indicator.isHidden = true
+                self?.setContentMode()
+                self?.delegate?.startStory()
+            case .failure(let error):
+                print("Story Download Error : \(error)")
+            }
+        }   
     }
     
     private func setContentMode() {
@@ -55,7 +74,7 @@ extension InnerCell {
             self.scrollV.zoomScale = 1.0
         }) { [weak self] (isAnimationDone) in
             if isAnimationDone {
-                self?.delegate?.imageZoomEnd()
+                self?.delegate?.resumeStory()
                 self?.isImageDragged = false
             }
         }
@@ -66,7 +85,7 @@ extension InnerCell {
 extension InnerCell: UIScrollViewDelegate {
     
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        delegate?.imageZoomStart()
+        delegate?.pauseStory()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

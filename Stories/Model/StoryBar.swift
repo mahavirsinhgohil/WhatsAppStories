@@ -74,12 +74,9 @@ class StoryBar : UIView{
             let _appDelegator = UIApplication.shared.delegate! as! AppDelegate
             if let bottom = _appDelegator.window?.safeAreaInsets.bottom {
                 return bottom
-            } else {
-                return 0
             }
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -133,7 +130,8 @@ extension StoryBar {
             currentAnimationIndex = newIndex
             removeOldAnimation()
             delegate?.segmentedProgressBarChangedIndex(index: newIndex)
-            animate(animationIndex: newIndex)
+            currentAnimationIndex = newIndex
+//            animate(animationIndex: newIndex)
         }
     }
 
@@ -143,7 +141,8 @@ extension StoryBar {
             let oldSegment = segments[currentAnimationIndex]
             removeOldAnimation(newWidth: oldSegment.nonAnimatingBar.frame.width)
             delegate?.segmentedProgressBarChangedIndex(index: newIndex)
-            animate(animationIndex: newIndex)
+            currentAnimationIndex = newIndex
+//            animate(animationIndex: newIndex)
         } else {
             delegate?.segmentedProgressBarReachEnd()
         }
@@ -171,7 +170,7 @@ extension StoryBar {
     
     func startAnimation() {
         layoutSubviews()
-        animate()
+        animate(animationIndex: currentAnimationIndex)
     }
     
     func pause() {
@@ -191,17 +190,15 @@ extension StoryBar {
     }
     
     func stop() {
-        if let _ = barAnimation {
-            barAnimation?.stopAnimation(true)
-            if barAnimation?.state == .stopped {
-                barAnimation?.finishAnimation(at: .current)
-            }
+        guard let barAnimation = barAnimation else { return }
+        barAnimation.stopAnimation(true)
+        if barAnimation.state == .stopped {
+            barAnimation.finishAnimation(at: .current)
         }
     }
     
-    func animate(animationIndex: Int = 0) {
+    func animate(animationIndex: Int) {
         let currentSegment = segments[animationIndex]
-        currentAnimationIndex = animationIndex
         
         if let _ = barAnimation {
             barAnimation = nil

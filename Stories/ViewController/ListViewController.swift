@@ -12,11 +12,20 @@ class ListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let imgCollection = [[UIImage(named:"pexels-photo-4525"),UIImage(named:"pexels-photo-302053"), UIImage(named:"pexels-photo-415326"),UIImage(named:"pexels-photo-452558")],
-                         [UIImage(named:"pexels-photo-4525"),UIImage(named:"pexels-photo-452558")],
-                         [UIImage(named:"pexels-photo-4525"),UIImage(named:"pexels-photo-302053"), UIImage(named:"pexels-photo-452558")],
-                         [UIImage(named:"pexels-photo-4525")],
-                         [UIImage(named:"pexels-photo-4525"), UIImage(named:"pexels-photo-452558"), UIImage(named:"pexels-photo-302053"), UIImage(named:"pexels-photo-415326")]] as! [[UIImage]]
+    let userStoryCollection = [
+        [URL(string: "http://www.bhmpics.com/wallpapers/caesar_in_planet_of_the_apes-852x480.jpg"),
+         URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/poster_sample_horror_education5.jpg"),
+         URL(string: "http://www.bhmpics.com/thumbs/justice_league_batman_team-t3.jpg"),
+         URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/its-a-wonderful-life-poster.jpg")],
+    [URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/poster_sample_horror_education1.jpg"),
+     URL(string: "http://www.bhmpics.com/thumbs/iron_man_in_the_rain-t3.jpg")
+        ],
+    [URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/poster_sample_horror_education6.jpg"),
+     URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/family_man-poster.jpg"),
+     URL(string: "http://www.bhmpics.com/wallpapers/giant_gorilla_kong_skull_island-852x480.jpg"),
+     URL(string: "https://www.filmsourcing.com/wp-content/uploads/2014/12/poster_sample_horror_education2.jpg"),
+     URL(string: "http://www.bhmpics.com/thumbs/logan_2018-t3.jpg"),
+     ]] as! [[URL]]
     
     override var prefersStatusBarHidden: Bool {
         return false
@@ -30,7 +39,7 @@ class ListViewController: UIViewController {
         if segue.identifier == "showStory" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let storyVC = segue.destination as! StoryViewController
-                storyVC.imageCollection = imgCollection
+                storyVC.storyCollection = userStoryCollection
                 storyVC.rowIndex = indexPath.row
                 tableView.deselectRow(at: indexPath, animated: false)
             }
@@ -42,7 +51,7 @@ class ListViewController: UIViewController {
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imgCollection.count
+        return userStoryCollection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

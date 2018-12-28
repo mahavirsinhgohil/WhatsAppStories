@@ -30,7 +30,7 @@ class OuterCell: UICollectionViewCell {
             storyBar.removeFromSuperview()
             storyBar = nil
         }
-        storyBar = StoryBar(numberOfSegments: story.images.count)
+        storyBar = StoryBar(numberOfSegments: story.stories.count)
         storyBar.frame = CGRect(x: 15, y: 15, width: weakParent!.view.frame.width - 30, height: 4)
         storyBar.delegate = self
         storyBar.animatingBarColor = UIColor.white
@@ -59,14 +59,20 @@ extension OuterCell: SegmentedProgressBarDelegate {
     }
 }
 
-// MARK:- Segmented ProgressBar Delegate
-extension OuterCell: ImageZoomDelegate {
+// MARK:- Story Handler Delegate
+extension OuterCell: StoryHandlerDelegate {
+    
+    func startStory() {
+        if let _ = storyBar {
+            storyBar.startAnimation()
+        }
+    }
 
-    func imageZoomStart() {
+    func pauseStory() {
         storyBar.pause()
     }
     
-    func imageZoomEnd() {
+    func resumeStory() {
         storyBar.resume()
     }
 }
@@ -75,7 +81,7 @@ extension OuterCell: ImageZoomDelegate {
 extension OuterCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return story.images.count
+        return story.stories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -84,8 +90,8 @@ extension OuterCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! InnerCell
-        cell.setImage(story.images[indexPath.row])
         cell.delegate = self
+        cell.setStory(story.stories[indexPath.row])
         return cell
     }
 }

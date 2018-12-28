@@ -9,11 +9,11 @@
 import UIKit
 
 class StoryHandler {
-    var images: [UIImage]
+    var stories: [URL]
     var storyIndex: Int = 0
     static var userIndex: Int = 0
     
-    init(imgs: [UIImage]) {
-        images = imgs
+    init(stories: [URL]) {
+        self.stories = stories
     }
 }

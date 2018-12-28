@@ -17,12 +17,16 @@
 		BC3B9A311F94D59B00BA8F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC3B9A2F1F94D59B00BA8F9A /* LaunchScreen.storyboard */; };
 		BC3B9A391F94D5C300BA8F9A /* StoryBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3B9A381F94D5C300BA8F9A /* StoryBar.swift */; };
 		BC3B9A3D1F95C69900BA8F9A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3B9A3C1F95C69900BA8F9A /* ListViewController.swift */; };
+		C3D0B6BD2078EC5EFF45D4BB /* Pods_Stories.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DFD71A867638F3B2EA86B8 /* Pods_Stories.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03D203C221CE195100F42E37 /* StoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHandler.swift; sourceTree = "<group>"; };
 		03F3286A21CA0BFC00D10749 /* OuterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OuterCell.swift; sourceTree = "<group>"; };
 		03F3286D21CA0EA200D10749 /* InnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerCell.swift; sourceTree = "<group>"; };
+		22B378725E1063DF3ABCD819 /* Pods-Stories.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stories.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stories/Pods-Stories.debug.xcconfig"; sourceTree = "<group>"; };
+		33B81F584C5B9E235D5CDD76 /* Pods-Stories.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stories.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stories/Pods-Stories.release.xcconfig"; sourceTree = "<group>"; };
+		46DFD71A867638F3B2EA86B8 /* Pods_Stories.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stories.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3B9A231F94D59B00BA8F9A /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3B9A261F94D59B00BA8F9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC3B9A281F94D59B00BA8F9A /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D0B6BD2078EC5EFF45D4BB /* Pods_Stories.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,11 +77,22 @@
 			path = CollectionCell;
 			sourceTree = "<group>";
 		};
+		75390C960114BA9AB1A261F2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22B378725E1063DF3ABCD819 /* Pods-Stories.debug.xcconfig */,
+				33B81F584C5B9E235D5CDD76 /* Pods-Stories.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BC3B9A1A1F94D59B00BA8F9A = {
 			isa = PBXGroup;
 			children = (
 				BC3B9A251F94D59B00BA8F9A /* Stories */,
 				BC3B9A241F94D59B00BA8F9A /* Products */,
+				75390C960114BA9AB1A261F2 /* Pods */,
+				E840C52B44B11013ED2901F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +119,14 @@
 			path = Stories;
 			sourceTree = "<group>";
 		};
+		E840C52B44B11013ED2901F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46DFD71A867638F3B2EA86B8 /* Pods_Stories.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC3B9A351F94D59B00BA8F9A /* Build configuration list for PBXNativeTarget "Stories" */;
 			buildPhases = (
+				8918226450EEEC02E672996A /* [CP] Check Pods Manifest.lock */,
 				BC3B9A1F1F94D59B00BA8F9A /* Sources */,
 				BC3B9A201F94D59B00BA8F9A /* Frameworks */,
 				BC3B9A211F94D59B00BA8F9A /* Resources */,
+				FCFEAD93BBEDA37320EF409A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -169,6 +195,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8918226450EEEC02E672996A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stories-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCFEAD93BBEDA37320EF409A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Stories/Pods-Stories-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stories/Pods-Stories-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BC3B9A1F1F94D59B00BA8F9A /* Sources */ = {
@@ -255,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -306,7 +379,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -316,13 +389,14 @@
 		};
 		BC3B9A361F94D59B00BA8F9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22B378725E1063DF3ABCD819 /* Pods-Stories.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5GL3E4GW7P;
 				INFOPLIST_FILE = Stories/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ankita-satpathy.Stories";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mahavirsinh.Stories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "iPhone WiledCard";
 				SWIFT_VERSION = 4.0;
@@ -332,13 +406,14 @@
 		};
 		BC3B9A371F94D59B00BA8F9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33B81F584C5B9E235D5CDD76 /* Pods-Stories.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Stories/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ankita-satpathy.Stories";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mahavirsinh.Stories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
