@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 16/10/17.
-//  Copyright © 2017 Mahavirsinh Gohil. All rights reserved.
+//  Created by Mahavirsinh Gohil
+//  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
 import UIKit
@@ -58,8 +58,7 @@ extension StoryViewController {
         let imageView = UIImageView()
         for storyURL in collection {
             imageView.kf.setImage(with: storyURL,
-                                  options: [.memoryCacheExpiration(.days(1))]) { (result) in }
-
+                                  options: [.memoryCacheExpiration(.days(2))]) { (result) in }
         }
     }
     

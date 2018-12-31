@@ -2,8 +2,8 @@
 //  ListViewController.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 17/10/17.
-//  Copyright © 2017 Mahavirsinh Gohil. All rights reserved.
+//  Created by Mahavirsinh Gohil
+//  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
 import UIKit

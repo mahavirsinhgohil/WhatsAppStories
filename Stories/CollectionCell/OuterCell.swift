@@ -2,7 +2,7 @@
 //  OuterCellCollectionViewCell.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 19/12/18.
+//  Created by Mahavirsinh Gohil
 //  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
@@ -46,6 +46,7 @@ extension OuterCell: SegmentedProgressBarDelegate {
 
     func segmentedProgressBarChangedIndex(index: Int) {
         weakParent?.currentStoryIndexChanged(index: index)
+        innerCollection.reloadItems(at: [IndexPath(item: index, section: 0)])
         innerCollection.scrollToItem(at: IndexPath(item: index, section: 0),
                                      at: .centeredHorizontally, animated: false)
     }
@@ -62,9 +63,13 @@ extension OuterCell: SegmentedProgressBarDelegate {
 // MARK:- Story Handler Delegate
 extension OuterCell: StoryHandlerDelegate {
     
-    func startStory() {
+    func startStoryForIndex(_ index: Int) {
         if let _ = storyBar {
-            storyBar.startAnimation()
+            if let cell = innerCollection.cellForItem(at: IndexPath(item: index, section: 0)) as? InnerCell {
+                if innerCollection.visibleCells.contains(cell) {
+                    storyBar.startAnimation()
+                }
+            }
         }
     }
 
@@ -91,7 +96,7 @@ extension OuterCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! InnerCell
         cell.delegate = self
-        cell.setStory(story.stories[indexPath.row])
+        cell.setStory(story.stories[indexPath.row], indexNo: indexPath.row)
         return cell
     }
 }

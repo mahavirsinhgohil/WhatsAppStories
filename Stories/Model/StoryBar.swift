@@ -2,8 +2,8 @@
 //  StoryBar.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 16/10/17.
-//  Copyright © 2017 Mahavirsinh Gohil. All rights reserved.
+//  Created by Mahavirsinh Gohil
+//  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
 import Foundation
@@ -131,7 +131,6 @@ extension StoryBar {
             removeOldAnimation()
             delegate?.segmentedProgressBarChangedIndex(index: newIndex)
             currentAnimationIndex = newIndex
-//            animate(animationIndex: newIndex)
         }
     }
 
@@ -142,7 +141,6 @@ extension StoryBar {
             removeOldAnimation(newWidth: oldSegment.nonAnimatingBar.frame.width)
             delegate?.segmentedProgressBarChangedIndex(index: newIndex)
             currentAnimationIndex = newIndex
-//            animate(animationIndex: newIndex)
         } else {
             delegate?.segmentedProgressBarReachEnd()
         }

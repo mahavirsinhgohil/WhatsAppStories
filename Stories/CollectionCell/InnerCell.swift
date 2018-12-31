@@ -2,7 +2,7 @@
 //  InnerCell.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 19/12/18.
+//  Created by Mahavirsinh Gohil
 //  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol StoryHandlerDelegate: class {
-    func startStory()
+    func startStoryForIndex(_ index: Int)
     func pauseStory()
     func resumeStory()
 }
@@ -23,7 +23,8 @@ class InnerCell: UICollectionViewCell {
     @IBOutlet weak var imgStory: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
-    private var isImageDragged:Bool = false
+    private var isImageDragged: Bool = false
+    private var runningTask: DownloadTask!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,26 +40,37 @@ class InnerCell: UICollectionViewCell {
 // MARK:- Helper Methods
 extension InnerCell {
     
-    func setStory(_ storyURL: URL) {
+    func setStory(_ storyURL: URL, indexNo: Int) {
+        imgStory.image = nil
         isImageDragged = false
         scrollV.isUserInteractionEnabled = false
         indicator.startAnimating()
         indicator.isHidden = false
-        imgStory.kf.setImage(with: storyURL,
-                             options: [.transition(.fade(0.2)),
-                                       .memoryCacheExpiration(.days(1)),
-                                       .downloadPriority(URLSessionTask.highPriority)]) {
-                                        [weak self] (result) in
+        imgStory.tag = indexNo
+        
+        if let _ = runningTask {
+            runningTask.cancel()
+        }
+        
+        runningTask = imgStory.kf.setImage(with: storyURL,
+                                            options: [.transition(.fade(0.2)),
+                                                      .memoryCacheExpiration(.days(2)),
+                                                      .downloadPriority(URLSessionTask.highPriority)]) {
+                                                        [weak self] (result) in
             switch result {
+            case .failure(.requestError(.taskCancelled)):
+                print("Story Download Error : Cancelled")
+            case .failure(.imageSettingError(.notCurrentSourceTask)):
+                print("Story Download Error : Not Current Task")
+            case .failure(let error):
+                print("Story Download Error : \(error)")
             case .success(_):
                 self?.scrollV.isUserInteractionEnabled = true
                 self?.indicator.isHidden = true
                 self?.setContentMode()
-                self?.delegate?.startStory()
-            case .failure(let error):
-                print("Story Download Error : \(error)")
+                self?.delegate?.startStoryForIndex(self!.imgStory.tag)
             }
-        }   
+        }
     }
     
     private func setContentMode() {

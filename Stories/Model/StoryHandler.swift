@@ -2,7 +2,7 @@
 //  StoryHandler.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil on 22/12/18.
+//  Created by Mahavirsinh Gohil
 //  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
