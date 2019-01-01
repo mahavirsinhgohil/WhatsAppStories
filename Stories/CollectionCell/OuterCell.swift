@@ -65,11 +65,7 @@ extension OuterCell: StoryHandlerDelegate {
     
     func startStoryForIndex(_ index: Int) {
         if let _ = storyBar {
-            if let cell = innerCollection.cellForItem(at: IndexPath(item: index, section: 0)) as? InnerCell {
-                if innerCollection.visibleCells.contains(cell) {
-                    storyBar.startAnimation()
-                }
-            }
+            storyBar.startAnimation()
         }
     }
 
@@ -98,5 +94,13 @@ extension OuterCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         cell.delegate = self
         cell.setStory(story.stories[indexPath.row], indexNo: indexPath.row)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? InnerCell {
+            if let _ = cell.runningTask {
+                cell.runningTask.cancel()
+            }
+        }
     }
 }

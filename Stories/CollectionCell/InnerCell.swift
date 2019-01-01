@@ -24,7 +24,7 @@ class InnerCell: UICollectionViewCell {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     private var isImageDragged: Bool = false
-    private var runningTask: DownloadTask!
+    var runningTask: DownloadTask!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,9 +64,10 @@ extension InnerCell {
                 print("Story Download Error : Not Current Task")
             case .failure(let error):
                 print("Story Download Error : \(error)")
-            case .success(_):
+            case .success(let obj):
                 self?.scrollV.isUserInteractionEnabled = true
                 self?.indicator.isHidden = true
+                self?.imgStory.image = obj.image
                 self?.setContentMode()
                 self?.delegate?.startStoryForIndex(self!.imgStory.tag)
             }

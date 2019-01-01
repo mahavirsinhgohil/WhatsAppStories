@@ -112,7 +112,7 @@ extension StoryViewController {
         self.view.addGestureRecognizer(tapGest)
         
         longPressGest = UILongPressGestureRecognizer(target: self,
-                                                         action: #selector(panGestureRecognizerHandler))
+                                                     action: #selector(panGestureRecognizerHandler))
         longPressGest.minimumPressDuration = 0.2
         self.view.addGestureRecognizer(longPressGest)
         
