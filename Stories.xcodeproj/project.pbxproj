@@ -161,6 +161,7 @@
 				TargetAttributes = {
 					BC3B9A221F94D59B00BA8F9A = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -399,7 +400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mahavirsinh.Stories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "iPhone WiledCard";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -416,7 +417,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mahavirsinh.Stories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

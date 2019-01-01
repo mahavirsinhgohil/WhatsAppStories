@@ -2,7 +2,7 @@
 //  InnerCell.swift
 //  Stories
 //
-//  Created by Mahavirsinh Gohil
+//  Crereated by Mahavirsinh Gohil
 //  Copyright © 2018 Mahavirsinh Gohil. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol StoryHandlerDelegate: class {
-    func startStoryForIndex(_ index: Int)
+    func startStory()
     func pauseStory()
     func resumeStory()
 }
@@ -25,6 +25,7 @@ class InnerCell: UICollectionViewCell {
 
     private var isImageDragged: Bool = false
     var runningTask: DownloadTask!
+    var didDownloadImage: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,18 +41,18 @@ class InnerCell: UICollectionViewCell {
 // MARK:- Helper Methods
 extension InnerCell {
     
-    func setStory(_ storyURL: URL, indexNo: Int) {
+    func setStory(_ storyURL: URL) {
         imgStory.image = nil
         isImageDragged = false
         scrollV.isUserInteractionEnabled = false
         indicator.startAnimating()
         indicator.isHidden = false
-        imgStory.tag = indexNo
         
         if let _ = runningTask {
             runningTask.cancel()
         }
         
+        didDownloadImage = false
         runningTask = imgStory.kf.setImage(with: storyURL,
                                             options: [.transition(.fade(0.2)),
                                                       .memoryCacheExpiration(.days(2)),
@@ -68,8 +69,9 @@ extension InnerCell {
                 self?.scrollV.isUserInteractionEnabled = true
                 self?.indicator.isHidden = true
                 self?.imgStory.image = obj.image
+                self?.didDownloadImage = true
                 self?.setContentMode()
-                self?.delegate?.startStoryForIndex(self!.imgStory.tag)
+                self?.delegate?.startStory()
             }
         }
     }

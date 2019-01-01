@@ -63,7 +63,7 @@ extension OuterCell: SegmentedProgressBarDelegate {
 // MARK:- Story Handler Delegate
 extension OuterCell: StoryHandlerDelegate {
     
-    func startStoryForIndex(_ index: Int) {
+    func startStory() {
         if let _ = storyBar {
             storyBar.startAnimation()
         }
@@ -92,7 +92,7 @@ extension OuterCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! InnerCell
         cell.delegate = self
-        cell.setStory(story.stories[indexPath.row], indexNo: indexPath.row)
+        cell.setStory(story.stories[indexPath.row])
         return cell
     }
     
